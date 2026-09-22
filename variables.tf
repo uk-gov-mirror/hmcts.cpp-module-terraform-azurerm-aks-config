@@ -901,6 +901,13 @@ variable "ado-agents_config" {
       }))
       run_as_user = number
       pvc_enabled = optional(bool)
+      # Demands a queued job carries that this module does not derive from the
+      # identifier. Azure DevOps adds one for every task that declares a
+      # capability - the Maven task adds "maven" - so a pool whose jobs use such
+      # a task queues work the KEDA scaler cannot see, and the pool never scales
+      # past minReplicaCount. The scaler counts a job only when every demand it
+      # carries is one of these, so listing a demand no job asks for is harmless.
+      extra_demands = optional(list(string), [])
     }))
   })
   default = {

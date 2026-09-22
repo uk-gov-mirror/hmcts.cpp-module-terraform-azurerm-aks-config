@@ -128,6 +128,7 @@ resource "kubectl_manifest" "azdevops_agent" {
     agent_name                 = each.value.agent_name
     poolname                   = var.ado-agents_config.poolname
     identifier                 = each.value.identifier
+    extra_demands              = join("", [for d in each.value.extra_demands : ",${d}"])
     enable_istio_proxy         = each.value.enable_istio_proxy
     sa_name                    = var.ado-agents_config.sa_name
     acr_name                   = var.acr_name

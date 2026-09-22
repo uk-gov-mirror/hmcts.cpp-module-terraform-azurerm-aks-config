@@ -14,7 +14,7 @@ spec:
       metadata:
         poolName: ${poolname}
         organizationURLFromEnv: "AZP_URL"
-        demands: "identifier -equals ${identifier}"
+        demands: "identifier -equals ${identifier}${extra_demands}"
       authenticationRef:
         name: pipeline-trigger-auth
   jobTargetRef:
